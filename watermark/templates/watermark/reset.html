@@ -1,0 +1,49 @@
+{% extends "watermark/layout.html" %}
+
+{% load static %}
+
+{% block body %}
+<style>
+body {
+  background-image: url("{% static 'watermark/watermark_background_240.png' %}");
+  background-repeat: repeat;
+}
+
+#logo {
+  margin-left: 35vw;
+  margin-top: 20vh;
+  width: 30vw;
+  animation-name: spin;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+
+}
+
+@keyframes spin {
+  from {transform: rotateY(0deg);}
+  to {transform: rotateY(360deg);}
+}
+</style>
+    <h4 class="m-3 w3-text w3-center mb-4">Wecome to WATERMARK!</h4>
+
+    <div class="p-3 mb-2">
+        I can insert <strong>watermarks</strong> to your image to protect your copyright.
+    </div>
+
+    <div class="p-3 mb-2">
+        Use <strong>MENU <i class='fas fa-bars'></i></strong> to do it.
+    </div>
+
+    <div class="p-3 mb-2">
+        <strong>LOAD</strong> your images and watermark (image usualy with transparent background).
+    </div>
+
+    <div class="p-3 mb-2">
+        <strong>VIEW</strong> your images with watermarks.
+    </div>
+
+    <div class="p-3 mb-2">
+        <strong>DOWNLOAD</strong> your images with watermarks.
+    </div>
+{% endblock %}

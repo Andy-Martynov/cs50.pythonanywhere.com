@@ -1,0 +1,77 @@
+.navbar * {
+    color: black !important;
+}
+.nav-link {
+    border-left: 1px solid black; !important;
+    border-top: 1px solid black; !important;
+    border-right: 1px solid black; !important;
+    padding-top: 0;
+    margin-bottom: -1px !important;
+    margin-left:3px !important;
+    border-bottom: 1px solid black; !important;
+    background-color: #f2f2f2 !important;
+}
+.admin {
+    background-color: #ffffcc !important;
+}
+.nav-green {
+    background-color: #ccffcc !important;
+}
+.nav-group {
+    background-color: #ccffff !important;
+}
+
+.navbar-text {
+    padding-top: 0;
+}
+.nav-link:hover, .dropdown-item:hover {
+    background-color: white !important;
+    border-bottom: 1px solid white !important;
+    color: red !important;
+}
+.nav-link[current="yes"] {
+    background-color: white !important;
+    border-bottom: 1px solid white !important;
+    color: #b30000 !important;
+}
+.navbar-collapse {
+    border-bottom: 1px solid black; !important;
+    margin-left:3px !important;
+}
+
+/*    ----   andys-table  ----    */
+
+.andys-table {
+    table-layout: fixed;
+}
+.andys-table tr:hover{
+    background-color: #b3ffb3;
+}
+.andys-table td, .andys-table th {
+    border: 1px solid #404040;
+    padding: 6px;
+}
+.price-img {
+    max-width: 300px;
+    max-height: 300px;
+}
+
+.andys-link-button {
+    background-color: teal;
+    color: white;
+    border-radius: 8px;
+    padding: 6px;
+    box-shadow: 2px 2px #cccccc;
+}
+.andys-link-button-wr {
+    background-color: white;
+    color: red;
+    border-radius: 8px;
+    border: 1px solid gray;
+    padding: 6px;
+    box-shadow: 2px 2px #cccccc;
+}
+.andys-card {
+    padding: 0;
+    min-width: 496px;
+}

@@ -1,0 +1,30 @@
+{% extends "hub/layout.html" %}
+
+{% load static %}
+
+{% block title %}
+    USERS
+{% endblock %}
+
+{% block hub_add_script_h %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() { setCurrent('account'); });
+    </script>
+    {% block script %}
+    {% endblock %}
+{% endblock %}
+
+
+{% block icon %}
+    <link rel="shortcut icon" href="{% static 'account/users_32.png' %}" type="image/png">
+{% endblock %}
+
+{% block home_link %}
+{% endblock %}
+
+
+{% block home_link_add %}
+    <a class="navbar-brand py-0" href="{% url 'hub:index' %}">
+        <img class="my-0 ml-2 w3-round-large" src="{% static 'hub/hub_60.png' %}">
+    </a>
+{% endblock %}

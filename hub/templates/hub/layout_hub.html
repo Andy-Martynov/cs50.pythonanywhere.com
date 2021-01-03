@@ -1,0 +1,15 @@
+{% extends "hub/layout.html" %}
+
+{% load static %}
+
+{% block nav_add %}
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" nav_index="groups" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        👯 groups
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{% url 'account:group_list' %}">📃 list</a>
+            <a class="dropdown-item" href="{% url 'account:group_create' %}">📌 new</a>
+        </div>
+    </li>
+{% endblock %}

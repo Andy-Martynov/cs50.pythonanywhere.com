@@ -1,0 +1,21 @@
+a{% extends "hub/layout.html" %}
+
+{% load static %}
+
+{% block title %}
+    GROUPS
+{% endblock %}
+
+{% block custom_script %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() { setCurrent('groups'); });
+</script>
+{% endblock %}
+
+{% block body %}
+    <form class="w3-container w3-xlarge" method="post">
+        {% csrf_token %}
+        {{ form.as_table}}
+        <input class="w3-button w3-teal w3-margin w3-round-xlarge" type="submit" value="SAVE">
+    </form>
+{% endblock %}

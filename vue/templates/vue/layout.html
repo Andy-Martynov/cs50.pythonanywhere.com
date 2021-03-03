@@ -1,0 +1,28 @@
+{% extends "hub/layout.html" %}
+
+{% load static %}
+
+{% block title %}VUE{% endblock %}
+
+{% block icon %}
+    <link rel="shortcut icon" href="{% static 'vue/vue_32.png' %}" type="image/png">
+{% endblock %}
+
+{% block head %}
+    {{ block.super }}
+{#    <link href="{% static 'vue/styles.css' %}" rel="stylesheet"> #}
+    <script src="{% static 'vue/index.js' %}"></script>
+{% endblock %}
+
+{% block home_link %}
+    {{ block.super }}
+    <div class="menu-icon">
+        <a href="{% url 'vue:index' %}">
+            <img src="{% static 'vue/vue_60.png' %}">
+        </a>
+    </div>
+    {% include "account/include_account_groups_menu.html" %}
+{% endblock %}
+
+{% block nav_add %}
+{% endblock %}

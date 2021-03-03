@@ -1,0 +1,19 @@
+{% extends "chat/layout.html" %}
+
+{% load static %}
+
+
+{% block section %}
+    <h1>CHAT</h1>
+
+    <div id="clocks" class="w3-margin w3-padding w3-border w3-round-xlarge">
+        <span class="w3-margin clock"></span>
+    </div>
+
+{% endblock %}
+
+{% block bottom_script %}
+    {{ block.super }}
+    <script src="{% static 'react/js/init.js' %}"></script>
+    <script src="{% static 'react/js/clocks.js' %}"></script>
+{% endblock %}

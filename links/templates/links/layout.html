@@ -1,0 +1,44 @@
+{% extends "hub/layout.html" %}
+
+{% load static %}
+
+{% block title %}Links{% endblock %}
+
+{% block icon %}
+    <link rel="shortcut icon" href="{% static 'links/links_32.png' %}" type="image/png">
+{% endblock %}
+
+{% block head %}
+    {{ block.super }}
+{#    <script src="{% static 'links/task_list.js' %}"></script> #}
+{#    <link href="{% static 'links/styles.css' %}" rel="stylesheet"> #}
+    <link href="{% static 'folders/styles.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block home_link %}
+    {{ block.super }}
+    <div class="menu-icon">
+        <a href="{% url 'links:index' %}">
+            <img src="{% static 'links/links_60.png' %}">
+        </a>
+    </div>
+    {% include "account/include_account_groups_menu.html" %}
+{% endblock %}
+
+{% block nav_add %}
+    <li class="nav-item">
+        <a
+            class="nav-link"
+            {% if object %}
+                href="{% url 'links:folder_create' object.id %}"
+            {% else %}
+                href="{% url 'links:folder_create' %}"
+            {% endif %}
+            rus="Новая папка"
+            eng="New folder">New folder</a>
+    </li>
+{% endblock %}
+
+{% block right %}
+{% endblock %}
+

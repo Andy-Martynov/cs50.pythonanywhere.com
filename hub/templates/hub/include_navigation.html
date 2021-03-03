@@ -1,0 +1,68 @@
+{% load static %}
+
+    {% block home_link %}
+        {% include "hub/include_hub_menu_icon.html" %}
+    {% endblock %}
+
+    {% block admin %}
+        {% include "hub/include_admin_menu_icon.html" %}
+    {% endblock %}
+
+    {% block home_link_add %}
+    {% endblock %}
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            {% if user.is_authenticated %}
+
+            {% block nav_add %}
+            {% endblock %}
+
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'account:login' %}">Log In</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'account:register' %}">Register</a>
+                </li>
+            {% endif %}
+
+            {% block nav_add_not_authenticated %}
+            {% endblock %}
+        </ul>
+
+        {% block lang %}
+            {% include "hub/include_lang_menu_icon.html" %}
+        {% endblock %}
+
+        {% if user.is_authenticated %}
+            <ul class="navbar-nav mr-1">
+                <li class="nav-item w3-center w3-hide-small">
+                    <a class="nav-link" nav_index="user" href="{% url 'account:user_update' %}">
+                        <strong class="nav-item w3-center w3-text-red">{{ user.username|upper }}</strong>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'account:logout' %}">🔽 Log Out</a>
+                </li>
+            </ul>
+        {% endif %}
+        <span id="user_id" style="visibility: hidden;">{% if user %}{{ user.id }}{% endif %}</span>
+    </div>
+    <div class="w3-hide-small">
+        {% if user.image %}
+            <a href="{% url 'account:user_image_update' %}">
+                <img src="{{ user.image.url }}" class="rounded-circle ml-2" style="width: 60px; height: 60px;">
+            </a>
+        {% else %}
+            <a href="{% url 'account:user_image_update' %}">
+                <img src="{%  static 'account/x.png' %}" class="rounded-circle ml-2" style="width: 60px; height: 60px;">
+            </a>
+        {% endif %}
+    </div>
+
+

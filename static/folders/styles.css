@@ -1,0 +1,17 @@
+.folder {
+    margin: 5px;
+    display: inline-block;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.folder p {
+    font-size: 0.6em;
+    max-width: 150px;
+    margin: 0;
+}
+.folder p:first-child {
+    font-size: 0.6em;
+    position: relative;
+    top: 45px;
+}

@@ -1,0 +1,63 @@
+{% extends "links/layout.html" %}
+
+{% load static %}
+
+{% block body %}
+<style>
+.link small {
+    color: blue;
+}
+.link img {
+    max-width: 20vw;
+    max-height: 20vh;
+}
+</style>
+    <div class="w3-row w3-margin-top w3-padding w3-center w3-round-xlarge w3-light-gray">
+        <span>{{ object.name }}</span>
+        <span class="w3-right">
+            <a class="action mx-3" href="{% url 'links:folder_update' object.id %}">
+                <i class="fa fa-edit w3-text-green"></i>
+            </a>
+            <a class="action mx-3" href="{% url 'links:folder_delete' object.id %}" onclick="return confirm('Are you sure?');">
+                <i class="fa fa-trash w3-text-red"></i>
+            </a>
+        </span>
+    </div>
+    <div class="w3-row-padding">
+        {% include "links/include_folder_list.html" %}
+    </div>
+
+    <div class="w3-row-padding">
+        {% for link in links %}
+          <div class="w3-col w3-padding-small">
+            <div class="w3-row w3-padding-small w3-round-xlarge w3-light-gray">
+                <span class="link w3-left">
+                    <a href="{{ link.url }}">
+                        {% if not link.title %}{{ link.name }}{% endif %}
+                        {% if link.title %}<span class="w3-text-indigo">{{ link.title }}</span>{% endif %}
+                        {% if link.description %} <small><i>{{ link.description }}</i></small>{% endif %}
+                        {% if link.image %}<img src="{{ link.image }}">{% endif %}
+                    </a>
+                </span>
+                <span class="w3-right">
+                    <a class="action mx-3" href="{% url 'links:link_update' link.id %}">
+                        <i class="fa fa-edit w3-text-green"></i>
+                    </a>
+                    <a class="action mx-3" href="{% url 'links:link_delete' link.id %}" onclick="return confirm('Are you sure?');">
+                        <i class="fa fa-trash w3-text-red"></i>
+                    </a>
+                </span>
+            </div>
+          </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block nav_add %}
+    {{ block.super }}
+    <li class="nav-item">
+        <a class="nav-link" nav_index="map" href="{% url 'links:link_create' object.id %}" rus="Новая ссылка" eng="New link">New link</a>
+    </li>
+{% endblock %}
+
+

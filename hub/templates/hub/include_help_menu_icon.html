@@ -1,0 +1,18 @@
+{% load static %}
+
+<script>
+function helpSetup() {
+    const btn = document.querySelector('#help-button');
+    const content = document.querySelector('#help-content').innerHTML;
+    // console.log("Content <", content, ">");
+    if (content == "") {
+        btn.style.display = "none";
+    }
+}
+</script>
+
+<div id="help-button" class="menu-icon">
+    <img src="{% static 'hub/lamp_60.png' %}" onload="helpSetup();" onclick="document.getElementById('help-modal').style.display='block'">
+</div>
+
+

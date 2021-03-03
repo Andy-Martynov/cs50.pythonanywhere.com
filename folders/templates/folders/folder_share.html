@@ -1,0 +1,66 @@
+{% extends "folders/layout.html" %}
+
+{% load static %}
+
+{% block head %}
+    {{ block.super }}
+    <script src="{% static 'folders/folder_share.js' %}"></script>
+{% endblock %}
+
+
+{% block section %}
+    <div class="w3-row w3-margin w3-padding w3-center w3-round-xlarge w3-light-gray">
+        <span><span rus="Поделиться" eng="Share">Share</span> {{ folder }}</span>
+        <span class="w3-right w3-red w3-padding w3-round-xlarge m-0">
+            <a class="action" href="{% url 'folders:folder_detail' folder.id %}">
+                OK
+            </a>
+        </span>
+    </div>
+    <div class="container-fluid w3-margin w3-padding">
+        <section class="d-flex flex-row flex-wrap justify-content-around">
+        	<div class="card col-lg-5 mb-1 px-2">
+                <div class="card-header d-flex flex-row justify-content-between p-1">
+        	        <span rus="Поделился c" eng="Shared to">Shared to</span> {{ shared.count }}
+        	   </div>
+        	   <div id="shared_to" class="card-body p-0 pt-2">
+                        {% for user in shared %}
+                            <p class="remove" fid="{{ folder.id }}" uid="{{ user.id }}">
+                                <i class='fas fa-arrow-alt-circle-right w3-text-red'></i>
+                                {% if user.image %}
+                                    <img src="{{ user.image.url }}" class="rounded-circle ml-2" style="width: 60px; height: 60px;">
+                                {% else %}
+                                    <img src="{%  static 'account/x.png' %}" class="rounded-circle ml-2" style="width: 60px; height: 60px;">
+                                {% endif %}
+                                {{ user }}
+                            </p>
+                        {% endfor %}
+        		</div>
+            </div>
+
+        	<div class="card col-lg-5 mb-1 px-2">
+                <div class="card-header d-flex flex-row justify-content-between p-1">
+        	        <span rus="С кем поделиться" eng="With whom">To whom</span>
+        	   </div>
+        	   <div id="users" class="card-body p-0">
+                    {% for item in group_list %}
+                        <h3>{{ item.group.name }}</h3>
+                        {% for user in item.members %}
+                            {% if not user in shared %}
+                                <p class="add" fid="{{ folder.id }}" uid="{{ user.id }}">
+                                    <i class='fas fa-arrow-alt-circle-left w3-text-green'></i>
+                                        {% if user.image %}
+                                            <img src="{{ user.image.url }}" class="rounded-circle ml-2" style="width: 60px; height: 60px;">
+                                        {% else %}
+                                            <img src="{%  static 'account/x.png' %}" class="rounded-circle ml-2" style="width: 60px; height: 60px;">
+                                        {% endif %}
+                                    {{ user }}
+                                </p>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+        		</div>
+            </div>
+        </section>
+    </div>
+{% endblock %}

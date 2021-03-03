@@ -1,0 +1,101 @@
+{% extends "hub/layout.html" %}
+
+{% load static %}
+
+{% block title %}Folders{% endblock %}
+
+{% block icon %}
+    <link rel="shortcut icon" href="{% static 'folders/folders_40.png' %}" type="image/png">
+{% endblock %}
+
+{% block head %}
+    {{ block.super }}
+{#    <script src="{% static 'folders/task_list.js' %}"></script> #}
+    <link href="{% static 'folders/styles.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block home_link %}
+    {{ block.super }}
+    {% include "folders/include_folders_menu_icon.html" %}
+    {% include "account/include_account_groups_menu.html" %}
+{% endblock %}
+
+{% block nav_add %}
+    <li class="nav-item">
+        <a
+            class="nav-link"
+            {% if object %}
+                href="{% url 'folders:folder_create' object.id %}"
+            {% else %}
+                href="{% url 'folders:folder_create' %}"
+            {% endif %}
+            rus="Новая папка"
+            eng="New folder">New folder</a>
+    </li>
+
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" nav_index="locations" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span rus="Вид">View</span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a
+                class="dropdown-item"
+                {% if object %}
+                    href="{% url 'folders:folder_tree' user.id object.id %}"
+                {% else %}
+                    {% if current_folder %}
+                        href="{% url 'folders:folder_tree' user.id current_folder.id %}"
+                    {% else %}
+                        href="{% url 'folders:folder_tree' user.id %}"
+                    {% endif %}
+                {% endif %}
+                rus="Дерево"
+                eng="Tree">Tree</a>
+            <a
+                class="dropdown-item"
+                {% if object %}
+                    href="{% url 'folders:folder_tree' user.id object.id 'full' %}"
+                {% else %}
+                    {% if current_folder %}
+                        href="{% url 'folders:folder_tree' user.id current_folder.id 'full' %}"
+                    {% else %}
+                        href="{% url 'folders:folder_tree' user_id=user.id folder_id=0 mode='full' %}"
+                    {% endif %}
+                {% endif %}
+                rus="Полное дерево"
+                eng="Full tree">Full tree</a>
+            <a
+                class="dropdown-item"
+                {% if object %}
+                    href="{% url 'folders:folder_detail' object.id %}"
+                {% else %}
+                    {% if current_folder %}
+                        href="{% url 'folders:folder_detail' current_folder.id %}"
+                    {% else %}
+                        href="{% url 'folders:folder_list' %}"
+                    {% endif %}
+                {% endif %}
+                rus="Папки"
+                eng="Folders">Folders</a>
+            {% if user.is_superuser %}
+                <a
+                    class="dropdown-item"
+                    {% if object %}
+                        href="{% url 'folders:folder_tree' user.id object.id 'full' %}"
+                    {% else %}
+                        {% if current_folder %}
+                            href="{% url 'folders:folder_tree' user.id current_folder.id 'full' %}"
+                        {% else %}
+                            href="{% url 'folders:folder_tree' %}"
+                        {% endif %}
+                    {% endif %}
+                    rus="Полное дерево"
+                    eng="Full tree">Full tree</a>
+            {% endif %}
+        </div>
+    </li>
+{% endblock %}
+
+{% block right %}
+{% endblock %}
+

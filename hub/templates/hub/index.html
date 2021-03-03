@@ -1,0 +1,358 @@
+{% extends "hub/layout_hub.html" %}
+
+{% load static %}
+
+{% load hub_extras %}
+
+{% block section %}
+<style>
+#animation {
+  animation-name: spin;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes spin {
+0%   {transform: scale(0) rotate(180deg);}
+50%  {transform: scale(1) rotate(0deg);}
+100% {transform: scale(0) rotate(-180deg);}}
+
+
+.certificate-sm {
+    width: 80px;
+    margin: 5px;
+    background-color: white;
+    border: 1px solid red;
+    opacity: 1;
+    transition: width 3s;
+}
+.certificate-sm:hover {
+    width: 100%;
+    /*position: relative;*/
+    /*top: 0;*/
+    /*left: 0;*/
+}
+
+.tab {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+.cell {
+    flex: 1;
+    border: 1px solid gray;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px #e6e6e6;
+    max-width: 300px;
+    margin: 5px;
+}
+
+.app_link {
+    font-size: 18px;
+}
+.app_link img {
+    margin-bottom: 5px;
+    margin-left: 5px;
+    max-width: 40px;
+    max-height: 40px;
+}
+/* medium screens */
+@media screen and (max-width: 992px) {
+  .app_link {
+      font-size: 12px;
+  }
+}
+/* small screens */
+@media screen and (max-width: 600px) {
+  .tab {
+    display: block;
+    padding: 10px;
+  }
+  .cell {
+    display: block;
+    width: 90%;
+    margin: 10px;
+  }
+}
+</style>
+
+    {% include 'todo/include_unrecieved_modal.html' %}
+
+    <div class="tab">
+        <div class="cell">
+            <details open class="p-0">
+                <summary>
+                    <img class="my-0 ml-2 w3-round-large" src="{% static 'hub/harvard_cs50.png' %}">
+                </summary>
+                <hr>
+
+                <a class="app_link" href="{% url 'project0:index' %}">
+                    <img src="{% static 'hub/html_60.png' %}">
+                    0, HTML/CSS
+                </a><br>
+
+                <a class="app_link" href="{% url 'encyclopedia:index' %}">
+                    <img src="{% static 'encyclopedia/wiki_60.png' %}">
+                    1, WIKI
+                </a><br>
+
+                <a class="app_link" href="{% url 'auctions:index' %}">
+                    <img src="{% static 'auctions/auction_60.png' %}">
+                    2, AUCTIONS
+                </a><br>
+
+                <a class="app_link" href="{% url 'mail:index' %}">
+                    <img src="{% static 'mail/mail_60.png' %}">
+                    3, MAIL
+                </a><br>
+
+                <a class="app_link" href="{% url 'network:index' %}">
+                    <img src="{% static 'network/network_60.png' %}">
+                    4, NETWORK
+                </a><br>
+
+                <a class="app_link" href="{% url 'meeting:index' %}">
+                    <img src="{% static 'meeting/meeting_60.png' %}">
+                    5, MEETING POINT
+                </a><br>
+
+                <a class="app_link" href="https://github.com/Andy-Martynov/cs50.pythonanywhere.com">
+                    <img src="{% static 'hub/github.png' %}">
+                    Github repository
+                </a><br>
+
+                <img src="{% static 'hub/certificate_cs50w.png' %}" class="certificate-sm" data-toggle="modal" data-target="#cert_cs50w">
+            </details>
+        </div>
+
+        <div class="cell">
+            <details open>
+                <summary>
+                    <img class="my-0 ml-2 w3-round-large" src="{% static 'hub/harvard_cs50ai.png' %}">
+                </summary>
+                <hr>
+                <a class="app_link" href="{% url 'learn:index' %}">
+                        <img src="{% static 'hub/ml_60.png' %}">
+                    LEARNING
+                </a><br>
+                to be continued ...
+                <br>
+                <img src="{% static 'hub/certificate_CS50AI.png' %}" class="certificate-sm"  data-toggle="modal" data-target="#cert_cs50ai">
+            </details>
+        </div>
+
+        <div class="cell">
+            <details open class="w3">
+                <summary class="w3-large">
+                    OTHER PROJECTS
+                </summary>
+                <hr>
+
+                    <a class="app_link" href="{% url 'folders:index' %}">
+                        <img src="{% static 'folders/folders_60.png' %}">
+                        FOLDERS
+                    </a><br>
+
+                    <a class="app_link" href="{% url 'links:index' %}">
+                        <img src="{% static 'links/links_60.png' %}">
+                        LINKS
+                    </a><br>
+
+                    <a class="app_link" href="{% url 'todo:index' %}">
+                        <img src="{% static 'todo/todo_60.png' %}">
+                        TO DO
+                    </a><br>
+
+                    <a class="app_link" href="{% url 'album:index' %}">
+                        <img src="{% static 'album/album_60.png' %}">
+                        ALBUM
+                    </a><br>
+
+                    <a class="app_link" href="{% url 'watermark:start' %}">
+                        <img src="{% static 'watermark/watermark_60.png' %}">
+                        WATERMARK
+                    </a><br>
+
+                    <a class="app_link" href="{% url 'animation:index' %}">
+                        <img id="animation" src="{% static 'animation/animation_60.png' %}">
+                        ANIMATION
+                    </a><br>
+
+                    <a class="app_link" href="{% url 'sudocu:init' %}">
+                        <img src="{% static 'sudocu/sudocu_60.png' %}">
+                        SUDOKU
+                    </a><br>
+
+                    {% if user.is_superuser %}
+                        <a class="app_link" href="{% url 'vue:index' %}">
+                            <img src="{% static 'vue/vue_60.png' %}">
+                            VUE
+                        </a><br>
+
+                        <a class="app_link" href="{% url 'react:index' %}">
+                            <img src="{% static 'react/react_60.png' %}">
+                            REACT
+                        </a><br>
+
+                        <a class="app_link" href="{% url 'chat:index' %}">
+                            <img src="{% static 'chat/chat_60.png' %}">
+                            CHAT
+                        </a><br>
+
+                    {% endif %}
+
+                    <a class="app_link" href="https://github.com/Andy-Martynov/cs50.pythonanywhere.com">
+                        <img src="{% static 'hub/github.png' %}">
+                        Github repository
+                    </a>
+            </details>
+        </div>
+    </div>
+
+<!-- Modal -->
+<div class="modal fade" id="cert_cs50w" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered  modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img id="cs50w" src="{% static 'hub/certificate_cs50w.png' %}" style="width: 100%">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="cert_cs50ai" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered  modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img id="cs50ai" src="{% static 'hub/certificate_CS50AI.png' %}" style="width: 100%">
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block right %}
+    <div class="col-12 col-md-3">
+        <div>
+            <h3 id="comments" rus='Комментарии' eng='COMMENTS'>COMMENTS</h3>
+
+        	{% if user.is_authenticated %}
+        	<div class="mx-4">
+        		<form method="post">
+        		    <table>
+        		        <tr>
+        		            <td>
+                    			{% csrf_token %}
+                    			{{ form.text }}
+                    			{{ form.author }}
+        		            </td>
+        		            <td>
+                    			<input class="w3-button w3-teal w3-round-xxlarge w3-tiny p-1" type="submit" value="&#10095;&#10095;">
+        		            </td>
+        		        </tr>
+        		    </table>
+        		</form>
+        	</div>
+        	{% endif %}
+
+            <table>
+                {% for post in page_obj %}
+    		        <tr>
+    				    <td class="w3-padding">
+    				        {% if post.author.image %}
+        				        <img class="avatar rounded-circle ml-2 mt-0" src="{{ post.author.image.url }}">
+    				        {% endif %}
+    				    </td>
+    			        <td>
+    						<strong>{{ post.author.username|tospace:"_" }}</strong> <i class="mr-1">{{ post.created|date:"D d M Y, G:i:s" }}</i>
+    			        </td>
+    			    </tr>
+    			    <tr>
+    			        <td></td>
+    			        <td class="w3-light-gray px-3 w3-round-xxlarge">
+    					    <p class="card-text" tid="{{ post.id }}">{{ post.text }}</p>
+    			        </td>
+    			    </tr>
+    			    <tr>
+    			        <td></td>
+    			        <td>
+    						<div class="mb-2" fid="{{ post.id }}" style="display:none;">
+    							<textarea aid="{{ post.id }}" class="form-control" name="text" rows="2">{{ post.text }}</textarea>
+    							<button pid="{{ post.id }}" class="save btn btn-outline-danger btn-sm mt-2">Save</button>
+    						</div>
+    						<span class="w3-text-dark-gray">
+    							Likes : <span class="counter" cid="{{ post.id }}">{{ post.like_me__count }}</span>
+    						</span>
+    						{% if user.is_authenticated %}
+    							{% if user != post.author %}
+    							    {% if post in i_like %}
+        								<span pid="{{ post.id }}" class="like">&#128078;</span>
+        							{% else %}
+            							<span pid="{{ post.id }}" class="like">&#128077;</span>
+        							{% endif %}
+    							{% else %}
+    								<a href="#" pid="{{ post.id }}" class="edit">&#9997;</a>
+    							{% endif %}
+    							{% if user.is_superuser %}
+    							    <a href="{% url 'hub:post_delete' post.id %}" class="delete w3-red" onclick="return confirm('Are you sure?');">&#9949;</a>
+    							{% endif %}
+    						{% endif %}
+
+    			        </td>
+    			    </tr>
+    		    {% endfor %}
+    		</table>
+            <br>
+        	<nav aria-label="Page navigation">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item">
+                        <a class="page-link" href="?page=1" aria-label="First">
+                            <span aria-hidden="true">&#10094;&#10094;</span>
+                            <span class="sr-only">First</span>
+                        </a>
+                    </li>
+                    {% if page_obj.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                                <span aria-hidden="true">&#10094;</span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                    <li class="page-item"><a class="page-link" href="#">{{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</a></li>
+                    {% if page_obj.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                                <span aria-hidden="true">&#10095;</span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}" aria-label="Last">
+                            <span aria-hidden="true">&#10095;&#10095;</span>
+                            <span class="sr-only">Last</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <hr>
+
+    </div>
+{% endblock %}
+
+

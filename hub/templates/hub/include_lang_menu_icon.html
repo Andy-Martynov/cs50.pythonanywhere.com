@@ -1,0 +1,62 @@
+{% load static %}
+
+<script>
+function setupLang() {
+    console.log('setupLang', localStorage.lang);
+    rus = document.querySelectorAll('[rus]');
+
+    if (rus.length > 0) {
+        state = localStorage.lang;
+        flags = document.querySelectorAll('.change_lang');
+        flags.forEach(flag => {
+            flag.style.display = 'block';
+            if (state == 'eng') {
+                if (flag.getAttribute('state') == 'rus') {
+                    src = flag.getAttribute('src');
+                    flag.setAttribute('src', src.replace('rus.png', 'eng.png'));
+                    flag.setAttribute('state', 'eng');
+                }
+                document.querySelectorAll('[eng]').forEach(el => el.innerHTML = el.getAttribute('eng'));
+            } else {
+                if (flag.getAttribute('state') == 'eng') {
+                    src = flag.getAttribute('src');
+                    flag.setAttribute('src', src.replace('eng.png', 'rus.png'));
+                    flag.setAttribute('state', 'rus');
+                }
+                document.querySelectorAll('[rus]').forEach(el => el.innerHTML = el.getAttribute('rus'));
+            }
+        });
+    }
+}
+
+function changeLang() {
+    console.log('changeLang', localStorage.lang);
+    flags = document.querySelectorAll('.change_lang');
+    state = localStorage.lang;
+    if (state == 'rus') {
+        localStorage.lang = 'eng';
+        flags.forEach(flag => {
+            src = flag.getAttribute('src');
+            flag.setAttribute('src', src.replace('rus.png', 'eng.png'));
+            flag.setAttribute('state', 'eng');
+        });
+        document.querySelectorAll('[eng]').forEach(el => el.innerHTML = el.getAttribute('eng'));
+    } else {
+        localStorage.lang = 'rus';
+        flags.forEach(flag => {
+            src = flag.getAttribute('src');
+            flag.setAttribute('src', src.replace('eng.png', 'rus.png'));
+            flag.setAttribute('state', 'rus');
+        });
+        document.querySelectorAll('[rus]').forEach(el => el.innerHTML = el.getAttribute('rus'));
+    }
+}
+</script>
+    <img
+        state="eng"
+        class="change_lang cs50-menu-icon mx-2 my-2 w3-round" src="{% static 'hub/eng.png' %}"
+        onclick="changeLang();"
+        onload="setupLang();"
+        style="display: none;"
+    >
+

@@ -1,0 +1,117 @@
+{% extends "folders/layout.html" %}
+
+{% load static %}
+
+{% block section %}
+    <style>
+        .level1 {margin-left: 20px;}
+        .level2 {margin-left: 30px;}
+        .level3 {margin-left: 40px;}
+        .level4 {margin-left: 50px;}
+        .level5 {margin-left: 60px;}
+    </style>
+
+    <h4 class="mt-0" rus="Папки:">Folders:</h4>
+
+    {% if current_folder %}
+        {% if parent %}
+            <a href="{% url 'folders:folder_tree' parent.user.id parent.id mode %}"><div class="px-3 py-0 my-1">. . </div></a>
+        {% else %}
+            <a href="{% url 'folders:folder_tree' user.id 0 mode %}"><div class="px-3 py-0 my-1">. . </div></a>
+        {% endif %}
+    {% endif %}
+
+    {% for folder in tree %}
+        {% if folder == current_folder or mode == 'full' or not current_folder and folder.level == 0 %}
+            <div class="level{{ folder.level }} py-0 px-1 my-1">
+                <a href="{% url 'folders:folder_tree' folder.user.id folder.id mode %}">
+                    <i class="fa fa-folder-open-o"></i> {{ folder.name }}.{{ folder.tag|default:"" }}
+
+                    {% if i_share %}
+                        {% for share in i_share %}
+                            {% if share.folder == folder %}
+                                <i class="fa fa-hand-o-right w3-text-red"></i> {{ share.who }}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </a>
+
+                {% if current_folder %}
+                    {% if folder == current_folder %}
+                        {% if current_folder.user == user %}
+                            <span class="w3-right">
+                                <a class="mx-2" href="{% url 'folders:folder_update' current_folder.id %}">
+                                    <i class="fa fa-edit w3-text-green"></i>
+                                </a>
+                                <a class="mx-2" href="{% url 'folders:folder_share' current_folder.id %}">
+                                    <i class="fa fa-hand-o-right w3-text-blue"></i>
+                                </a>
+                                <a class="mx-2" href="{% url 'folders:folder_delete' current_folder.id %}" onclick="return confirm('Are you sure?');">
+                                    <i class="fa fa-trash w3-text-red"></i>
+                                </a>
+                            </span>
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+            </div>
+        {% endif %}
+
+
+        {% if folder.subfolders.all and mode != 'full' %}
+            <details>
+                <summary class="level{{ folder.level|add:'1' }} py-0 px-1 my-1"><i class="fa fa-folder-open-o"></i></summary>
+                {% for sub in folder.subfolders.all %}
+                    {% if sub.name != 'None' %}
+                        <div class="level{{ sub.level }} py-0 px-1 my-1">
+                            <a href="{% url 'folders:folder_tree' sub.user.id sub.id mode %}">
+                                <i class="fa fa-folder-open-o"></i> {{ sub.name }}.{{ sub.tag|default:"" }}
+                            </a>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </details>
+        {% endif %}
+
+        {% if folder.links.all %}
+          {% if folder == current_folder or mode == 'full' %}
+            <details>
+                <summary class="level{{ folder.level|add:'1' }} py-0 px-1 my-1"><i class='fas fa-external-link-alt'></i></summary>
+                {% for link in folder.links.all %}
+                    {% if link.name != 'None' %}
+                        <div class="level{{ folder.level|add:"1" }} py-0 px-1 my-1">
+                            <a href="{{ link.url }}" target="_blanck"><i class='fas fa-external-link-alt'></i> {{ link.name }}</a>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </details>
+          {% endif %}
+        {% endif %}
+
+    {% endfor %}
+
+    <hr>
+
+    {% if shared and not current_folder %}
+        <h4 class="mt-0" rus="Расшарено:">Shared:</h4>
+        {% for folder in shared %}
+            <a href="{% url 'folders:folder_tree' folder.user.id folder.id mode %}">
+                <div class="p-1 my-1">
+                    <i class="fa fa-folder-open-o"></i> {{ folder.name }}.{{ folder.tag|default:"" }} <i class="fa fa-hand-o-left w3-text-red"></i> {{ folder.user.username }}
+                </div>
+            </a>
+
+            {% if folder.links.all %}
+                <details>
+                    <summary class="level{{ folder.level|add:"1" }} py-0 px-1 my-1"><i class='fas fa-external-link-alt'></i></summary>
+                    {% for link in folder.links.all %}
+                        {% if link.name != 'None' %}
+                            <div class="level{{ folder.level|add:"1" }} py-0 px-1 my-1">
+                                <a href="{{ link.url }}" target="_blanck"><i class='fas fa-external-link-alt'></i> {{ link.name }}</a>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </details>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+{% endblock %}

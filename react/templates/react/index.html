@@ -1,0 +1,53 @@
+{% extends "react/layout.html" %}
+
+{% load static %}
+
+{% block section %}
+    <h1>REACT</h1>
+
+    <div id="hello" class="w3-margin w3-padding w3-border w3-round-xlarge">
+    </div>
+
+    <div class="w3-margin w3-padding w3-border w3-round-xlarge">
+        <div class="w3-button w3-red w3-round w3-round-xlarge w3-margin like_button_container" id="" data-commentid="1"></div>
+
+        <div class="w3-button w3-blue w3-round w3-round-xlarge w3-margin like_button_container" data-commentid="2"></div>
+
+        <div class="w3-button w3-green w3-round w3-round-xlarge w3-margin like_button_container" data-commentid="3"></div>
+
+        <div class="w3-button w3-yellow w3-round w3-round-xlarge w3-margin like_button_container" data-commentid="4"></div>
+    </div>
+
+    <div id="clocks" class="w3-margin w3-padding w3-border w3-round-xlarge">
+        <span class="w3-margin clock"></span>
+
+        <span class="w3-margin clock"></span>
+
+        <span class="w3-margin clock"></span>
+    </div>
+
+    <div id="buttons" class="w3-margin w3-padding w3-border w3-round-xlarge">
+        <span id="like_button_0"></span>
+        <span id="button_on_off"></span>
+        <span id="button_login_control"></span>
+    </div>
+
+    <div id="users" class="w3-margin w3-padding w3-border w3-round-xlarge">
+        {% for user in users %}
+            <p>{{ user }}</p>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block bottom_script %}
+    {{ block.super }}
+    <script src="{% static 'react/js/hello.js' %}"  type="text/babel"></script>
+
+    <script src="{% static 'react/js/like_button.js' %}"></script>
+
+    <script src="{% static 'react/js/clocks.js' %}"></script>
+
+    <script src="{% static 'react/js/button_on_off.js' %}"></script>
+    <script src="{% static 'react/js/like_button_0.js' %}"></script>
+    <script src="{% static 'react/js/button_login_control.js' %}"></script>
+{% endblock %}

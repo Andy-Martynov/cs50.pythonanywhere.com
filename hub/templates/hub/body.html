@@ -1,0 +1,26 @@
+        <div class="container-fluid">
+            <div class="row">
+                {% block left %}
+                    {% if user.is_authenticated %}
+                        <div class="col-12 col-md-3 p-1">
+                            {% block left_content %}
+                                {% block who_is_online %}
+                                    {# include "hub/include_online_users_and_groups.html" #}
+                                {% endblock %}
+                            {% endblock %}
+                        </div>
+                    {% endif %}
+                {% endblock %}
+
+                <div class="col">
+                    {% block section %}
+                    {% endblock %}
+                </div>
+
+                {% block right %}
+                    <div class="col-12 col-md-2">
+                        {% block right_content %}Right content{% endblock %}
+                    </div>
+                {% endblock %}
+            </div>
+        </div>

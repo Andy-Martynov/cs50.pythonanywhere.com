@@ -1,0 +1,17 @@
+{% extends "account/layout.html" %}
+
+{% block body %}
+    <div class="w3-container w3-teal w3-margin-bottom">
+        <h2>LOGIN</h2>
+    </div>
+
+    <form class="w3-container" action="{% url 'account:login' %}" method="post">
+        {% csrf_token %}
+        <input autofocus class="w3-light-gray w3-input w3-margin w3-xlarge w3-round-xlarge" type="text" name="username" placeholder="Username">
+        <input class="w3-light-gray w3-input w3-margin w3-xlarge w3-round-xlarge" type="password" name="password" placeholder="Password">
+        <input class="w3-button w3-teal w3-margin-left w3-round-xlarge" type="submit" value="LOGIN">
+    </form>
+    <div class="w3-container w3-light-gray w3-section w3-margin-left w3-padding w3-large">
+        <span class="w3-xlarge">Don't have an account?</span> <a class="w3-button w3-teal w3-margin-left w3-round-xlarge" href="{% url 'account:register' %}">Register here.</a>
+    </div>
+{% endblock %}

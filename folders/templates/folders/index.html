@@ -1,0 +1,12 @@
+{% extends "folders/layout.html" %}
+
+{% load static %}
+
+{% block add_to_head %}
+{{ block.super }}
+{# <script src="{% static 'todo/task_list.js' %}"></script> #}
+{% endblock %}
+
+{% block section %}
+    <h1>Folders</h1>
+{% endblock %}

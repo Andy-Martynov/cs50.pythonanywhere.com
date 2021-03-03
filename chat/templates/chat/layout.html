@@ -1,0 +1,28 @@
+{% extends "hub/layout.html" %}
+
+{% load static %}
+
+{% block title %}CHAT{% endblock %}
+
+{% block icon %}
+    <link rel="shortcut icon" href="{% static 'chat/chat_32.png' %}" type="image/png">
+{% endblock %}
+
+{% block head %}
+    {{ block.super }}
+{#    <link href="{% static 'chat/styles.css' %}" rel="stylesheet"> #}
+{#    <script src="{% static 'chat/index.js' %}"></script> #}
+{% endblock %}
+
+{% block home_link %}
+    {{ block.super }}
+    <div class="menu-icon">
+        <a href="{% url 'chat:index' %}">
+            <img src="{% static 'chat/chat_60.png' %}">
+        </a>
+    </div>
+    {% include "account/include_account_groups_menu.html" %}
+{% endblock %}
+
+{% block right %}
+{% endblock %}
